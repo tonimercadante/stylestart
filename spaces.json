@@ -1,0 +1,17 @@
+{
+  "ame": {
+    "name": "AME",
+    "execute": [
+      {
+        "name": "v3",
+        "dir": "/Users/tonimercadante/SSStyle/ame/v3v3/",
+        "newtab": false,
+        "commands": [
+          "conda activate icomserver356",
+          "export DJANGO_SETTINGS_MODULE=icom_server.settings.dev.will",
+          "python manage.py runserver 0.0.0.0:8000"
+        ]
+      }
+    ]
+  }
+}
