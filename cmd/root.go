@@ -27,4 +27,5 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(startWorkspace)
+	rootCmd.AddCommand(createWorkspace)
 }
