@@ -10,7 +10,7 @@ import (
 )
 
 type Spaces struct {
-	Name     string   `json:"name"`
+	Alias    string   `json:"alias"`
 	Dir      string   `json:"dir"`
 	NewTab   bool     `json:"newtab"`
 	Commands []string `json:"commands"`
@@ -23,6 +23,7 @@ type space struct {
 }
 
 var name string
+var description string
 
 var createWorkspace = &cobra.Command{
 	Use:   "create",
@@ -35,8 +36,9 @@ func runCreateWorkspace(cmd *cobra.Command, args []string) {
 	log.Println("Creating new workspace", args, name)
 
 	space := &space{
-		Name:   name,
-		Spaces: []Spaces{},
+		Name:        name,
+		Description: description,
+		Spaces:      []Spaces{},
 	}
 
 	spaceJson, _ := json.Marshal(space)
@@ -49,5 +51,7 @@ func runCreateWorkspace(cmd *cobra.Command, args []string) {
 
 func init() {
 	createWorkspace.Flags().StringVarP(&name, "name", "n", "", "Name of the workspace")
+	createWorkspace.Flags().StringVarP(&description, "description", "d", "", "Description of the workspace")
+
 	createWorkspace.MarkFlagRequired("name")
 }
