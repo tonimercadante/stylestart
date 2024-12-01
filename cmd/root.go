@@ -7,6 +7,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var workspaceName string
+
 var rootCmd = &cobra.Command{
 	Use:   "stylestart",
 	Short: "Stylestart is a simple Cobra application",
@@ -26,6 +28,9 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.PersistentFlags().StringVarP(&workspaceName, "workspace", "w", "", "Name of the workspace")
+	rootCmd.MarkPersistentFlagRequired("workspace")
+
 	rootCmd.AddCommand(startWorkspace)
 	rootCmd.AddCommand(createWorkspace)
 	rootCmd.AddCommand(registerCommand)

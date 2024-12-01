@@ -17,8 +17,6 @@ var registerCommand = &cobra.Command{
 	Run:   runRegisterCommand,
 }
 
-var workspaceName string
-
 func runRegisterCommand(cmd *cobra.Command, args []string) {
 	currentDir, err := os.Getwd()
 
@@ -45,11 +43,14 @@ func runRegisterCommand(cmd *cobra.Command, args []string) {
 	fmt.Println(commandExec)
 
 	var commandAlias string
-	fmt.Print("Alias for this project:")
+	fmt.Print("Alias for this project: ")
 	fmt.Scanln(&commandAlias)
 
-	workspaceJSON, _ := os.ReadFile("data/ame.json")
+	workspaceJSONname := fmt.Sprintf("data/%s.json", workspaceName)
+	workspaceJSON, _ := os.ReadFile(workspaceJSONname)
+
 	var workspace map[string]interface{}
+
 	if err := json.Unmarshal(workspaceJSON, &workspace); err != nil {
 		panic(err)
 	}
@@ -72,6 +73,5 @@ func runRegisterCommand(cmd *cobra.Command, args []string) {
 }
 
 func init() {
-	registerCommand.Flags().StringVarP(&workspaceName, "workspace", "w", "", "Name of the workspace")
-	registerCommand.MarkFlagRequired("workspacename")
+
 }
